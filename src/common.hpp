@@ -1,4 +1,8 @@
+#pragma once
+
 #include <inttypes.h>
+
+enum class DenominatorCode;
 
 struct Decimal
 {
@@ -6,7 +10,7 @@ struct Decimal
     DenominatorCode denominator_code;
 };
 
-enum DenominatorCode
+enum class DenominatorCode
 {
     Ones,
     Tenths,
