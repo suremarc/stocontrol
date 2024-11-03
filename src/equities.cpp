@@ -1,12 +1,11 @@
-#include <string>
-#include <fstream>
-#include <unordered_map>
-#include <array>
-
 #include <lexy/callback.hpp>
 #include <lexy/dsl.hpp>
 
-#include "market.hpp"
+#include "equities.hpp"
+
+BBO TAQMarket::quote(Equity::ID asset_id) {
+    // todo
+};
 
 namespace taq
 {
