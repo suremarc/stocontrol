@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <array>
 
+#include <lexy/callback.hpp>
 #include <lexy/dsl.hpp>
 
 #include "market.hpp"
@@ -88,8 +89,13 @@ namespace taq
 
         struct decimal
         {
-            static constexpr auto rule = dsl::integer<uint32_t> + dsl::opt(dsl::lit<"."> + dsl::integer<uint32_t>);
-            static constexpr auto value = lexy::construct<Decimal>;
+            static constexpr auto rule = dsl::integer<int32_t> + dsl::opt(dsl::lit<"."> + dsl::integer<uint32_t>);
+            static constexpr auto value = lexy::callback<Decimal>([](
+                                                                      std::int32_t integer_part,
+                                                                      std::optional<std::uint32_t> fractional_part)
+                                                                  { return Decimal{
+                                                                        numerator : integer_part,
+                                                                    }; });
         };
     };
 }

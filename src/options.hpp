@@ -1,6 +1,7 @@
 #include <string>
 #include <chrono>
 #include <inttypes.h>
+
 #include "market.hpp"
 #include "equities.cpp"
 
@@ -45,10 +46,8 @@ enum class OptionStyle
 class OPRAMarket : Market<Option<Equity>>
 {
 private:
-    void handle_pkt(const uint8_t *data) {}
+    void handle_pkt(const uint8_t *data);
 
 public:
-    BBO quote(Option<Equity>::ID asset_id)
-    {
-    }
+    BBO quote(Option<Equity>::ID asset_id);
 };
