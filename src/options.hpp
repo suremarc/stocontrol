@@ -43,7 +43,7 @@ enum class OptionStyle
     European,
 };
 
-class OPRAMarket : Market<Option<Equity>>
+class OPRAMarket
 {
 private:
     void handle_pkt(const uint8_t *data);
@@ -51,3 +51,6 @@ private:
 public:
     BBO quote(Option<Equity>::ID asset_id);
 };
+
+// TODO: implement Market for OPRAMarket
+// static_assert(Market<OPRAMarket, Option<Equity>>, "TAQMarket must satisfy the Market concept");

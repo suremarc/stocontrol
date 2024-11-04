@@ -2,6 +2,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <array>
+#include <ranges>
 
 #include "market.hpp"
 
@@ -12,12 +13,17 @@ public:
     ID ticker;
 };
 
-class TAQMarket : Market<Equity>
+class TAQMarket
 {
 private:
-    std::ofstream taq_file;
+    std::ostream taq_nbbo_file;
     std::unordered_map<Equity::ID, BBO> top_of_book;
+    std::vector<Equity> assets;
 
 public:
-    BBO quote(Equity::ID asset_id);
+    std::chrono::time_point<std::chrono::steady_clock> timestamp() const;
+    BBO quote(Equity::ID asset_id) const;
+    std::ranges::subrange<typename std::vector<Equity>::const_iterator> assets() const;
 };
+
+static_assert(Market<TAQMarket, Equity>, "TAQMarket must satisfy the Market concept");
